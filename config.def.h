@@ -9,25 +9,25 @@
 #define _CONFIG_H
 
 /* how long to display notifications */
-#define NOTIFICATION_TIMEOUT	10
+#define NOTIFICATION_TIMEOUT    10
 
 /* name of the icon used for notifications */
-#define ICON_AUDIO_X_GENERIC	"audio-x-generic"
+#define ICON_AUDIO_X_GENERIC    "audio-x-generic"
 
 /* strings used to display notification messages
  * TEXT_PLAY_* need to include one string modifier '%s' each. */
-#define TEXT_TOPIC		"MPD Notification"
-#define TEXT_PLAY_TITLE		"Playing <b>%s</b>"
-#define TEXT_PLAY_ARTIST	"by <i>%s</i>"
-#define TEXT_PLAY_ALBUM		"from <i>%s</i>"
-#define TEXT_PAUSE		"Paused playback"
-#define TEXT_STOP		"Stopped playback"
-#define TEXT_NONE		"No action received yet."
-#define TEXT_UNKNOWN		"(unknown)"
+#define TEXT_TOPIC          "----------------"
+#define TEXT_PLAY_TITLE     "<b>%s</b>"
+#define TEXT_PLAY_ARTIST    "<i>%s</i>"
+#define TEXT_PLAY_ALBUM     "<i>%s</i>"
+#define TEXT_PAUSE          "[P]"
+#define TEXT_STOP           "[S]"
+#define TEXT_NONE           "[N]"
+#define TEXT_UNKNOWN        "[U]"
 
 /* this is a regular expression that has to match image filename used
  * for artwork */
-#define REGEX_ARTWORK	"\\(folder\\|cover\\)\\.\\(jpg\\|png\\)"
+#define REGEX_ARTWORK   "\\(folder\\|cover\\)\\.\\(jpg\\|png\\)"
 
 /* how to connect to mpd host ?
  * MPD_HOST is the server's host name, IP address or Unix socket path. If the
@@ -37,9 +37,9 @@
  * MPD_PORT is the TCP port to connect to, 0 for default port. If "host" is
  * a Unix socket path, this parameter is ignored.
  * MPD_TIMEOUT is the timeout in milliseconds, 0 for the default timeout. */
-#define MPD_HOST	NULL
-#define MPD_PORT	0
-#define MPD_TIMEOUT	0
+#define MPD_HOST    NULL
+#define MPD_PORT    0
+#define MPD_TIMEOUT 0
 
 #endif /* _CONFIG_H */
 
