@@ -420,8 +420,29 @@ int main(int argc, char ** argv) {
 			if ((album = mpd_song_get_tag(song, MPD_TAG_ALBUM, 0)) != NULL)
 				notifystr = append_string(notifystr, TEXT_PLAY_ALBUM, oneline ? ' ' : '\n', album);
 
-			if ((genre = mpd_song_get_tag(song, MPD_TAG_GENRE, 0)) != NULL)
-				notifystr = append_string(notifystr, TEXT_PLAY_GENRE, oneline ? ' ' : '\n', genre);
+			if ((genre = mpd_song_get_tag(song, MPD_TAG_GENRE, 0)) != NULL) {
+                int j = 0;
+                char * genre_=strdup(genre);
+                size_t genre_len = strlen(genre_);
+                for (int i = 0; i < genre_len; i++) {
+                    if (genre_[i] != '"' && genre_[i] != '\'' && genre_[i] != '\\') {
+                        genre_[j++] = genre_[i];
+                    } else if (genre_[i+1] == '"' && genre_[i] == '\\') {
+                        genre_[j++] = '"';
+                    } else if (genre_[i+1] == '\'' && genre_[i] == '\\') {
+                        genre_[j++] = '\'';
+                    } else if (genre_[i+1] != '"' && genre_[i+1] != '\'' && genre_[i] == '\\') {
+                        genre_[j++] = '\\';
+                    }
+                }
+
+                if(j>0) {
+                    genre_[j]='\0';
+                }
+
+				notifystr = append_string(notifystr, TEXT_PLAY_GENRE, oneline ? ' ' : '\n', genre_);
+				free(genre_);
+            }
 
 			uri = mpd_song_get_uri(song);
 
