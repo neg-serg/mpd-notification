@@ -222,7 +222,7 @@ char * append_string(char * string, const char * format, const char delim, const
 /*** main ***/
 int main(int argc, char ** argv) {
 	dictionary * ini = NULL;
-	const char * title = NULL, * artist = NULL, * album = NULL;
+	const char * title = NULL, * artist = NULL, * album = NULL, * genre = NULL;
 	char * notifystr = NULL;
 	GdkPixbuf * pixbuf = NULL;
 	GError * error = NULL;
@@ -419,6 +419,9 @@ int main(int argc, char ** argv) {
 
 			if ((album = mpd_song_get_tag(song, MPD_TAG_ALBUM, 0)) != NULL)
 				notifystr = append_string(notifystr, TEXT_PLAY_ALBUM, oneline ? ' ' : '\n', album);
+
+			if ((genre = mpd_song_get_tag(song, MPD_TAG_GENRE, 0)) != NULL)
+				notifystr = append_string(notifystr, TEXT_PLAY_GENRE, oneline ? ' ' : '\n', genre);
 
 			uri = mpd_song_get_uri(song);
 
