@@ -141,8 +141,10 @@ GdkPixbuf * retrieve_artwork(const char * music_dir, const char * uri) {
 image:
 #endif
 
-	/* cut the file name from path for current directory */
-	*strrchr(uri_path, '/') = 0;
+    if (uri_path != NULL) {
+        /* cut the file name from path for current directory */
+        *strrchr(uri_path, '/') = 0;
+    }
 
 	if ((dir = opendir(uri_path)) == NULL) {
 		fprintf(stderr, "%s: Could not open directory '%s': %s", program, uri_path, strerror(errno));
