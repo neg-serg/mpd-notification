@@ -19,8 +19,7 @@ const static struct option options_long[] = {
 	{ "timeout",	required_argument,	NULL,	't' },
 	{ "verbose",	no_argument,		NULL,	'v' },
 	{ "version",	no_argument,		NULL,	'V' },
-	{ "notification-file-workaround",
-			no_argument,		NULL,	OPT_FILE_WORKAROUND },
+	{ "notification-file-workaround", no_argument,		NULL,	OPT_FILE_WORKAROUND },
 	{ 0, 0, 0, 0 }
 };
 
@@ -472,18 +471,7 @@ int main(int argc, char ** argv) {
 			}
 
 			mpd_song_free(song);
-		} else if (state == MPD_STATE_PAUSE) {
-			notifystr = strdup(TEXT_PAUSE);
-#ifdef HAVE_SYSTEMD
-			sd_notify(0, "READY=1\nSTATUS=" TEXT_PAUSE);
-#endif
-		} else if (state == MPD_STATE_STOP) {
-			notifystr = strdup(TEXT_STOP);
-#ifdef HAVE_SYSTEMD
-			sd_notify(0, "READY=1\nSTATUS=" TEXT_STOP);
-#endif
-		} else
-			notifystr = strdup(TEXT_UNKNOWN);
+		}
 
 		if (verbose > 0)
 			printf("%s: %s\n", program, notifystr);
@@ -492,14 +480,13 @@ int main(int argc, char ** argv) {
 		 * file and give the path. */
 		if (file_workaround > 0 && pixbuf != NULL) {
 			gdk_pixbuf_save(pixbuf, "/tmp/.mpd-notification-artwork.png", "png", NULL, NULL);
-
 			notify_notification_update(notification, TEXT_TOPIC, notifystr, "/tmp/.mpd-notification-artwork.png");
-		} else
-			notify_notification_update(notification, TEXT_TOPIC, notifystr, ICON_AUDIO_X_GENERIC);
+		}
 
 		/* Call this unconditionally! When pixbuf is NULL this clears old image. */
 		notify_notification_set_image_from_pixbuf(notification, pixbuf);
 
+        printf("timeout=%u", notification_timeout * 1000);
 		notify_notification_set_timeout(notification, notification_timeout * 1000);
 
 		while(notify_notification_show(notification, &error) == FALSE) {
