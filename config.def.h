@@ -17,11 +17,11 @@
 /* strings used to display notification messages
  * TEXT_PLAY_* need to include one string modifier '%s' each. */
 #define TEXT_TOPIC          "----------------"
-#define TEXT_PLAY_TITLE     "<b>%s</b>"
-#define TEXT_PLAY_ARTIST    "<i>%s</i>"
-#define TEXT_PLAY_ALBUM     "<i>%s</i>"
+#define TEXT_PLAY_PAUSE_STATE   "%s "
+#define TEXT_PLAY_PAUSE_TITLE   "<b>%s</b>"
+#define TEXT_PLAY_PAUSE_ARTIST  "by <i>%s</i>"
+#define TEXT_PLAY_PAUSE_ALBUM   "from <i>%s</i>"
 #define TEXT_PLAY_GENRE     "<i>%s</i>"
-#define TEXT_PAUSE          "[P]"
 #define TEXT_STOP           "[S]"
 #define TEXT_NONE           "[N]"
 #define TEXT_UNKNOWN        "[U]"
